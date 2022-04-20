@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 public record Generator (
     TestContext testContext,
-    Class<?>[] classes,
+    List<Class<?>> classes,
     List<Supplier<List<Entity>>> argumentSuppliers
 ) implements Supplier<List<Entity>> {
     @Override
@@ -20,7 +20,7 @@ public record Generator (
 
         for (final Supplier<List<Entity>> supplier : argumentSuppliers) {
             final List<Entity> currentArguments = supplier.get();
-            assert currentArguments.size() == classes.length;
+            assert currentArguments.size() == classes.size();
 
             arguments.add(currentArguments);
         }
@@ -29,7 +29,7 @@ public record Generator (
         String className = null;
         String presentation = null;
 
-        for (int i = 0; i < classes.length; i ++)
+        for (int i = 0; i < classes.size(); i ++)
             try {
                 final Object[] argumentValues = new Object[argumentSuppliers.size()];
                 final Class<?>[] argumentClasses = new Class[argumentSuppliers.size()];
@@ -42,7 +42,7 @@ public record Generator (
                 }
 
                 // Запоминаем имя класса и презентацию на случай ошибки
-                className = classes[i].getSimpleName();
+                className = classes.get(i).getSimpleName();
                 presentation = String.format(
                     "%s(%s)",
                     className,
@@ -51,8 +51,8 @@ public record Generator (
 
                 // Инстанцируем класс
                 result.add(new Entity(
-                    classes[i].getDeclaredConstructor(argumentClasses).newInstance(argumentValues),
-                    classes[i],
+                    classes.get(i).getDeclaredConstructor(argumentClasses).newInstance(argumentValues),
+                    classes.get(i),
                     String.format("new %s(%s)", className, String.join(", ", argumentPresentations))
                 ));
             } catch (NoSuchMethodException exception) {

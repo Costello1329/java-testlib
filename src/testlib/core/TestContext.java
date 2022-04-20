@@ -26,11 +26,16 @@ public class TestContext {
         return null;
     }
 
-    public TestContext (final Path[] jars, final String[][] classNames) {
+    public TestContext () {
         log = new StringBuilder();
         expected = null;
         got = null;
         reason = null;
+        classesToTest = null;
+    }
+
+    public TestContext (final Path[] jars, final String[][] classNames) {
+        super();
         classesToTest = new Class[classNames.length][jars.length];
 
         for (int i = 0; i < jars.length; i ++) {

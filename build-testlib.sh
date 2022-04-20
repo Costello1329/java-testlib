@@ -1,31 +1,35 @@
+cd src
+
 javac \
-src/testlib/components/Entity.java \
-src/testlib/components/EntityComparator.java \
-src/testlib/components/EntityComparatorRecord.java \
-src/testlib/components/Generator.java \
-src/testlib/components/MethodCall.java \
-src/testlib/components/OperationsApplier.java \
-src/testlib/core/Test.java \
-src/testlib/core/TestContext.java \
-src/testlib/core/Tester.java
+testlib/components/Entity.java \
+testlib/components/EntityComparator.java \
+testlib/components/EntityComparatorRecord.java \
+testlib/components/Generator.java \
+testlib/components/MethodCall.java \
+testlib/components/OperationsApplier.java \
+testlib/core/Test.java \
+testlib/core/TestContext.java \
+testlib/core/Tester.java
 
-jar -cf testlib.jar \
-src/testlib/components/Entity.class \
-src/testlib/components/EntityComparator.class \
-src/testlib/components/EntityComparatorRecord.class \
-src/testlib/components/Generator.class \
-src/testlib/components/MethodCall.class \
-src/testlib/components/OperationsApplier.class \
-src/testlib/core/Test.class \
-src/testlib/core/TestContext.class \
-src/testlib/core/Tester.class
+jar -cf ../testlib.jar \
+testlib/components/Entity.class \
+testlib/components/EntityComparator.class \
+testlib/components/EntityComparatorRecord.class \
+testlib/components/Generator.class \
+testlib/components/MethodCall.class \
+testlib/components/OperationsApplier.class \
+testlib/core/Test.class \
+testlib/core/TestContext.class \
+testlib/core/Tester.class
 
-unlink src/testlib/components/Entity.class
-unlink src/testlib/components/EntityComparator.class
-unlink src/testlib/components/EntityComparatorRecord.class
-unlink src/testlib/components/Generator.class
-unlink src/testlib/components/MethodCall.class
-unlink src/testlib/components/OperationsApplier.class
-unlink src/testlib/core/Test.class
-unlink src/testlib/core/TestContext.class
-unlink src/testlib/core/Tester.class
+unlink testlib/components/Entity.class
+unlink testlib/components/EntityComparator.class
+unlink testlib/components/EntityComparatorRecord.class
+unlink testlib/components/Generator.class
+unlink testlib/components/MethodCall.class
+unlink testlib/components/OperationsApplier.class
+unlink testlib/core/Test.class
+unlink testlib/core/TestContext.class
+unlink testlib/core/Tester.class
+
+cd ../
