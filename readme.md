@@ -13,12 +13,13 @@
      Например, у нас есть класс `RussianDeveloper` и `IndianDeveloper`. Оба – получают в конструкторе два аргумента: `String name` и `? salary`. Однако, `RussianEmployee` получает зарплату в виде числа `int salary`, а `IndianEmployee` – в виде `boolean hasSalary`. `Generator` как раз позволяет создать инстанс этих двух классов, на основании списка `Supplier`'ов их аргументов. В нашем случае, нам надо создать два `Supplier`'а аргументов: один – для имени, второй – для зарплаты. Сами `Supplier`'ы аргументов могут работать как декларативно (просто возвращая какое-то фиксированное значение), так и рандомно (генерировать значение случайно на-лету).
      
      Напишем классы разработчиков:
-     ```
+     ```java17
      public record RussianDeveloper (String name, int salary) {}
      public record IndianDeveloper (String name, boolean hasSalary) {}
      ```
      
      Напишем `NameSupplier`:
+     ```
      record NameSupplier () implements Supplier<List<Entity>> {
          @Override
          public List<Entity> get () {
