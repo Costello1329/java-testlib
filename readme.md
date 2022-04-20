@@ -60,6 +60,26 @@
          System.out.println(employees);
      }
      ```
+  + `Entity`: сущность, с которой работает `testlib`. Имеет два конструктора: двуаргументный конструктор можно использовать для примитивов, трехаргументный – для объектов.
+  + `MethodCall`: описание вызова метода. Принимает название метода и список сущностей-аргументов.
+  + `OperationsApplier`: класс, применяющий операции к переданным сущностям. Например, у нас есть два класса: `Square` и `Triangle`, и мы хотим применить к ним список одинаковых операций: `rotate(-.5)`, потом `translate(13., 29.)`, ну и `scale(.5)` Для этого, создадим `OperationsApplier` и будем применять операции до тех пор, пока они есть:
+    ```java17
+    /// Список фигур, полученный, например, от генератора:
+    final List<Entity> shapes = ...;
+    
+    final OperationsApplier operationsApplier = new OperationsApplier(
+        testContext,
+        List.of(
+            new MethodCall("rotate", List.of(new Entity(-.5, double.class))),
+            new MethodCall("translate", List.of(new Entity(13., double.class), new Entity(29., double.class))),
+            new MethodCall("scale", List.of(new Entity(.5, double.class))),
+        )
+    );
+    
+    while (operationsApplier.hasNext())
+        operationsApplier.apply("shape", shapes);
+    ```
+  + `EntityComparator`: класс, сравнивающий схожие сущности посредством вызова на них цепочек методов и сравнения их результатов с помощью переданных предикатов. Например, пусть у нас есть два инстанса класса `Square`, и мы хотим создать компаратор, сравнивающий их на основе их характеристик с точностью `1e-6`. Посмотреть код по этому примеру можно [тут](https://github.com/Costello1329/simple-geometry-tests-demo/blob/master/src/Tests.java).
 
 ## Copyright
 
