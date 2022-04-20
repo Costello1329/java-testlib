@@ -35,7 +35,7 @@ public class TestContext {
     }
 
     public TestContext (final Path[] jars, final String[][] classNames) {
-        super();
+        this();
         classesToTest = new Class[classNames.length][jars.length];
 
         for (int i = 0; i < jars.length; i ++) {
@@ -90,5 +90,5 @@ public class TestContext {
     private String expected;
     private String got;
     private String reason;
-    private final Class<?>[][] classesToTest;
+    private Class<?>[][] classesToTest;
 }
